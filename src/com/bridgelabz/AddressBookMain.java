@@ -21,12 +21,18 @@ public class AddressBookMain
         }
     }
 
-    private static void retrieveData() {
+    private static void retrieveData() 
+    {
         AddressBook addressBookRepo = new AddressBook();
         List<Contacts> employeeInfoList = addressBookRepo.retrieveData();
         for (Contacts employee : employeeInfoList
         ) {
             System.out.println(employee + "\n");
         }
+    }
+    private static void updateCity() {
+        AddressBook addressBookRepo = new AddressBook();
+        System.out.println("Enter the address,city,state, zip and Serial Number  to Update");
+        addressBookRepo.updateCityByZip(scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt());
     }
 }

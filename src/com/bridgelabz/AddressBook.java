@@ -3,13 +3,13 @@ package com.bridgelabz;
 import java.sql.*;
 import java.util.*;
 
-public class AddressBook 
+public class AddressBook
 {
-	Connection connection;
+    Connection connection;
 
     private Connection getConnection() {
 
-        String URL_JD = "jdbc:mysql://localhost:3306/payrollService?user=root";
+        String URL_JD = "jdbc:mysql://localhost:3306/addressbookservice?user=root";
         String USER_NAME = "root";
         String PASSWORD = "Arun@12345";
 
@@ -31,7 +31,7 @@ public class AddressBook
         List<Contacts> addressBookList = new ArrayList<Contacts>();
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
-            String sql = "select * from AddressBook";
+            String sql = "select * from addressbook";
             resultSet = statement.executeQuery(sql);
             int count = 0;
             while (resultSet.next()) {
@@ -55,5 +55,18 @@ public class AddressBook
         }
         return addressBookList;
 
+    }
+    public void updateCityByZip(String address, String city, String state, int zip, int srNo) {
+        try (Connection connection = getConnection()) {
+            Statement statement = connection.createStatement();
+            String query = "Update addressBook set address=" + "'" + address + "'" + ", " + "city=" + "'" + city + "'" + ", " + "state=" + "'" + state + "'" + ", " + "zip=" + zip + " where srNo=" + srNo + ";";
+            int result = statement.executeUpdate(query);
+            System.out.println(result);
+            if (result > 0) {
+                System.out.println("Address Updated Successfully");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
